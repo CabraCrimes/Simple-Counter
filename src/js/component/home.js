@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import Timer from "./Count.jsx";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Count from "./Count";
+
 
 
 
@@ -19,19 +19,21 @@ const Home = () => {
 			}
 		}, [isPlay]);
 	  
-	//<div><i className="bi bi-clock"></i></div>
-	//https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css
-	return (
-		<div className="container"> 
+		//<div><i className="bi bi-clock"></i></div>
+		//https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css
+		return (
+			<div className="container"> 
 			<div className="d-flex vh-100 justify-content-center align-items-center">
 				<div>
-					<div className=" text-center row row-cols-6 g-2 align-items-center">
-						<Timer count={Math.floor(time / 100000) % 10}/>
-						<Timer count={Math.floor(time / 10000) % 10}/>
-						<Timer count={Math.floor(time / 1000) % 10}/>
-						<Timer count={Math.floor(time / 100) % 10}/>
-						<Timer count={Math.floor(time / 10) % 10}/>
-						<Timer count={Math.floor(time) % 10}/>
+				
+					<div className=" text-center row row-cols-7 g-2 align-items-center">
+						<Count count={<i class="fa-solid fa-clock"></i>}/>
+						<Count count={Math.floor(time / 100000) % 10}/>
+						<Count count={Math.floor(time / 10000) % 10}/>
+						<Count count={Math.floor(time / 1000) % 10}/>
+						<Count count={Math.floor(time / 100) % 10}/>
+						<Count count={Math.floor(time / 10) % 10}/>
+						<Count count={Math.floor(time) % 10}/>
 					</div>
 					<div className="d-flex ">
 						<button className={`btn btn-${isShowButtons ? "secondary" : "light" } text-center  mx-auto mt-4`}onClick={()=>{
