@@ -1,27 +1,53 @@
 import React, {useEffect, useState} from "react";
 import Timer from "./Count.jsx";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 
 const Home = () => {
 
-	const [time, setTime] = useState(0)
+	const [time, setTime] = useState(0);
+	const [isPlay, setPlay] = useState(true);
+	const [isShowButtons, setShowButtons] = useState(true);
 
 	useEffect(() => {
-		const interval = setInterval(() => {
-		  setTime(time => time + 1);
-		}, 1000);
-		return () => clearInterval(interval);
-	  }, []);
-	
+		if(isPlay) {
+			const interval = setInterval(() => {
+				setTime(preTime => preTime + 1);
+			}, 1000);
+			return () => clearInterval(interval);
+			}
+		}, [isPlay]);
+	  
+	//<div><i className="bi bi-clock"></i></div>
+	//https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css
 	return (
-		<div className="container  ">
-			<div className="vh-100 text-center row row-cols-6 g-2 align-items-center ">
-				<Timer count={time / 100000}/>
-				<Timer count={time / 10000}/>
-				<Timer count={time / 1000}/>
-				<Timer count={time / 100}/>
-				<Timer count={time / 10}/>
-				<Timer count={time}/>
+		<div className="container"> 
+			<div className="d-flex vh-100 justify-content-center align-items-center">
+				<div>
+					<div className=" text-center row row-cols-6 g-2 align-items-center">
+						<Timer count={Math.floor(time / 100000) % 10}/>
+						<Timer count={Math.floor(time / 10000) % 10}/>
+						<Timer count={Math.floor(time / 1000) % 10}/>
+						<Timer count={Math.floor(time / 100) % 10}/>
+						<Timer count={Math.floor(time / 10) % 10}/>
+						<Timer count={Math.floor(time) % 10}/>
+					</div>
+					<div className="d-flex ">
+						<button className={`btn btn-${isShowButtons ? "secondary" : "light" } text-center  mx-auto mt-4`}onClick={()=>{
+							setShowButtons(!isShowButtons)
+						}}>{isShowButtons  ? "Hide" : "Show"}</button>
+						{ isShowButtons ? <>
+						<button className={`btn btn-${isPlay ? "danger" : "success" } text-center d-flex mx-auto mt-4`}onClick={() => {
+							setPlay(!isPlay);
+						}}>{isPlay === false ? "Play" : "Pause"}</button>
+						<button className={`btn btn-${time ? "secondary" : "light" } text-center d-flex mx-auto mt-4`}onClick={() => {
+							setTime(0);
+							isPlay === false;
+						}}>{"Restart"}</button></> : null 
+						}
+					</div>
+				</div>
 			</div>
 		</div>
 	);
