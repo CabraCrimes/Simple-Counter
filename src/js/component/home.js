@@ -25,7 +25,6 @@ const Home = () => {
 			<div className="container"> 
 			<div className="d-flex vh-100 justify-content-center align-items-center">
 				<div>
-				
 					<div className=" text-center row row-cols-7 g-2 align-items-center">
 						<Count count={<i class="fa-solid fa-clock"></i>}/>
 						<Count count={Math.floor(time / 100000) % 10}/>
